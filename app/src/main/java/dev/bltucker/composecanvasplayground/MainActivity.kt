@@ -5,43 +5,42 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import dev.bltucker.composecanvasplayground.common.Screens
 import dev.bltucker.composecanvasplayground.common.ui.theme.ComposeCanvasPlaygroundTheme
+import dev.bltucker.composecanvasplayground.home.HomeScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
+            var selectedScreen by rememberSaveable {
+                mutableStateOf(Screens.HOME)
+            }
+
             ComposeCanvasPlaygroundTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                when (selectedScreen) {
+                    Screens.HOME -> {
+                        HomeScreen(
+                            modifier = Modifier.fillMaxSize(),
+                            onScreenSelected = {
+                                selectedScreen = it
+                            }
+                        )
+                    }
+
+                    Screens.WEIGHT_PICKER -> TODO()
+                    Screens.CLOCK -> TODO()
+                    Screens.PICKER -> TODO()
+                    Screens.TIC_TAC_TOE -> TODO()
+                    Screens.IMAGE_REVEAL -> TODO()
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    ComposeCanvasPlaygroundTheme {
-        Greeting("Android")
     }
 }
