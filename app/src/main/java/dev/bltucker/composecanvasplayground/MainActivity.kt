@@ -11,7 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import dev.bltucker.composecanvasplayground.ui.theme.ComposeCanvasPlaygroundTheme
+import dev.bltucker.composecanvasplayground.common.ui.theme.ComposeCanvasPlaygroundTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

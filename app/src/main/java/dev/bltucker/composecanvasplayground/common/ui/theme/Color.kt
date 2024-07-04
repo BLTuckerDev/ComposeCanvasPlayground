@@ -1,4 +1,4 @@
-package dev.bltucker.composecanvasplayground.ui.theme
+package dev.bltucker.composecanvasplayground.common.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
