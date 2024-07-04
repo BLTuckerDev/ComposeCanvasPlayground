@@ -10,6 +10,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import dev.bltucker.composecanvasplayground.clicker.ClickerScreen
 import dev.bltucker.composecanvasplayground.common.Screens
 import dev.bltucker.composecanvasplayground.common.ui.theme.ComposeCanvasPlaygroundTheme
 import dev.bltucker.composecanvasplayground.home.HomeScreen
@@ -39,6 +40,13 @@ class MainActivity : ComponentActivity() {
                     Screens.PICKER -> TODO()
                     Screens.TIC_TAC_TOE -> TODO()
                     Screens.IMAGE_REVEAL -> TODO()
+                    Screens.CLICKER -> {
+                        ClickerScreen(modifier = Modifier.fillMaxSize(),
+                            onExitClicked = {
+                                selectedScreen = Screens.HOME
+                            }
+                        )
+                    }
                 }
             }
         }
