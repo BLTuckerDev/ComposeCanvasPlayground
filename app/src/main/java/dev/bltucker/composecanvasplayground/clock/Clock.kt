@@ -15,6 +15,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.drawscope.rotate
 import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -46,7 +47,8 @@ fun Clock(modifier: Modifier = Modifier) {
         }
     }
 
-    BoxWithConstraints(modifier = modifier.padding(16.dp)) {
+
+    BoxWithConstraints(modifier = modifier) {
         val widthPx = constraints.maxWidth
         val heightPx = constraints.maxHeight
         val radiusPx = widthPx.toFloat() / 2f
@@ -111,36 +113,34 @@ fun Clock(modifier: Modifier = Modifier) {
 
             }
 
-            /*
-            val tickMarkStart = Offset(
-                    x = (radiusPx - lineLength.toPx()) * kotlin.math.cos(tickMarkAngle) + center.x,
-                    y = (radiusPx - lineLength.toPx()) * kotlin.math.sin(tickMarkAngle) + center.y
+            rotate(degrees = currentTime.second * 6F){
+                drawLine(
+                    color = secondHandColor,
+                    start = center,
+                    end = Offset(center.x, radiusPx + longTickMarkLengthDp.toPx()),
+                    strokeWidth = 1.dp.toPx()
                 )
+            }
 
-                val stickMarkEnd = Offset(
-                    x = radiusPx * kotlin.math.cos(tickMarkAngle) + center.x,
-                    y = radiusPx  * kotlin.math.sin(tickMarkAngle) + center.y
+
+            rotate(degrees = currentTime.minute * 6F){
+                drawLine(
+                    color = minuteHandColor,
+                    start = center,
+                    end = Offset(center.x, radiusPx + longTickMarkLengthDp.toPx() + 4.dp.toPx()),
+                    strokeWidth = 4.dp.toPx()
                 )
-             */
-
-            val secondHandLineLengthPx = radiusPx - longTickMarkLengthDp.toPx()
-            val secondHandAngle = (currentTime.second * 6) * (Math.PI / 180f).toFloat()
-            Log.d("SecondAngle", "currentSecond = ${currentTime.second }, secondHandAngle = $secondHandAngle")
+            }
 
 
-            val secondHandStartOffset = Offset(center.x, center.y)
-            val secondHandEndOffset = Offset(
-                x  = (center.x - secondHandLineLengthPx) * kotlin.math.cos(secondHandAngle) + center.x,
-                y = (center.y -  secondHandLineLengthPx) * kotlin.math.sin(secondHandAngle) - center.y
-            )
-
-            drawLine(color = secondHandColor,
-                start = secondHandStartOffset,
-                end = secondHandEndOffset,
-
+            rotate(degrees = currentTime.hour * 30F){
+                drawLine(
+                    color = minuteHandColor,
+                    start = center,
+                    end = Offset(center.x, radiusPx + longTickMarkLengthDp.toPx() + 24.dp.toPx()),
+                    strokeWidth = 4.dp.toPx()
                 )
-
-
+            }
             
 
         }//endCanvas
