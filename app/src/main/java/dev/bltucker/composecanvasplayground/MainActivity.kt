@@ -14,6 +14,7 @@ import dev.bltucker.composecanvasplayground.clicker.ClickerScreen
 import dev.bltucker.composecanvasplayground.common.Screens
 import dev.bltucker.composecanvasplayground.common.ui.theme.ComposeCanvasPlaygroundTheme
 import dev.bltucker.composecanvasplayground.home.HomeScreen
+import dev.bltucker.composecanvasplayground.weightpicker.WeightPickerScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,7 +36,12 @@ class MainActivity : ComponentActivity() {
                         )
                     }
 
-                    Screens.WEIGHT_PICKER -> TODO()
+                    Screens.WEIGHT_PICKER -> {
+                        WeightPickerScreen(modifier = Modifier.fillMaxSize(),
+                            onExitClicked = {
+                                selectedScreen = Screens.HOME
+                            })
+                    }
                     Screens.CLOCK -> TODO()
                     Screens.PICKER -> TODO()
                     Screens.TIC_TAC_TOE -> TODO()
